@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Galerie de microscopie — Mémo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Microscopie — Galerie</h1>
+    <p class="subtitle">Observations — cliquez pour agrandir • flèches ← → pour naviguer • Échap pour fermer</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <input id="search" type="search" placeholder="Rechercher par étiquette ou description…" />
+      <select id="filter">
+        <option value="all">Tout</option>
+        <option value="brightfield">Brightfield</option>
+        <option value="fluorescence">Fluorescence</option>
+        <option value="polarized">Polarized</option>
+      </select>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <!-- Exemple d’item : duplique et modifie data-* pour tes images -->
+      <article class="card" data-tags="feuille" data-desc="Feuille à 100×" tabindex="0">
+        <img src="images/feuille-de-bouleau.jpg" data-full="images/feuille-de-bouleau.jpg" alt="Feuille de bouleau à 100×" />
+        <div class="meta">
+          <h3>Feuille — 100×</h3>
+          <p class="desc">Feuille de bouleau desséchée.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="humain" data-desc="Cheveux d’homme — brun" tabindex="0">
+        <img src="images/cheveux-homme.jpg" data-full="images/cheveux-homme.jpg" alt="Gros plan de cheveux" />
+        <div class="meta">
+          <h3>Cheveux — Homme</h3>
+          <p class="desc">Cheveux bruns d’un homme d’âge mûr.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="fibre synthétique" data-desc="Fibre sur lame à frais" tabindex="0">
+        <img src="images/fibre-de-polyester.jpg" data-full="images/fibre-de-polyester.jpg" alt="Fibre ou duvet de couverture" />
+        <div class="meta">
+          <h3>Fibre synthétique — Lumière naturelle</h3>
+          <p class="desc">Surface lisse et irrégulière.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="fibre synthétique" data-desc="Fibre sur lame à frais" tabindex="0">
+        <img src="images/fil-de-chemise-bleu.jpg" data-full="images/fil-de-chemise-bleu.jpg" alt="Fibre de chemise bleue" />
+        <div class="meta">
+          <h3>Fibre synthétique — Lumière naturelle</h3>
+          <p class="desc">Un fil composé de plusieurs brins.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="micro-organisme" data-desc="Kyste supposé de protozoaire" tabindex="0">
+        <img src="images/kiste-de-protozoaire.jpg" data-full="images/kiste-de-protozoaire.jpg" alt="Kyste de protozoaire" />
+        <div class="meta">
+          <h3>Micro-organisme — Lumière naturelle</h3>
+          <p class="desc">Kyste desséché prélevé dans un pot d’eau contenant de la mousseline verte au repos depuis 7 mois.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="biologie" data-desc="Feuille à 100×" tabindex="0">
+        <img src="images/mousseline-verte.jpg" data-full="images/mousseline-verte.jpg" alt="Feuille de mousseline" />
+        <div class="meta">
+          <h3>Feuille — 100×</h3>
+          <p class="desc">Feuille de mousseline conservée dans un pot depuis 7 mois.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="poils humains" data-desc="Poil prélevé sur un homme d’âge mûr" tabindex="0">
+        <img src="images/poils-pubien-homme.jpg" data-full="images/poils-pubien-homme.jpg" alt="Poils pubiens" />
+        <div class="meta">
+          <h3>Poils pubiens — 100×</h3>
+          <p class="desc">Prélevé sur un homme de 43 ans.</p>
+        </div>
+      </article>
+
+      <article class="card" data-tags="salive" data-desc="Salive humaine" tabindex="0">
+        <img src="images/salive-deshydratee.jpg" data-full="images/salive-deshydratee.jpg" alt="Salive déshydratée" />
+        <div class="meta">
+          <h3>Salive — 100×</h3>
+          <p class="desc">La lame contenant la salive a été passée sous une flamme pour la dessécher, donnant une teinte orangée.</p>
+        </div>
+      </article>
+
+      <!-- Ajoute autant d’articles que nécessaire -->
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="close" title="Fermer">✕</button>
+    <button class="nav prev" title="Précédent">‹</button>
+    <button class="nav next" title="Suivant">›</button>
+    <div class="lb-content">
+      <img id="lb-img" src="" alt="" />
+      <div class="lb-info">
+        <h3 id="lb-title"></h3>
+        <p id="lb-desc"></p>
+        <a id="lb-download" class="download" download>Télécharger</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

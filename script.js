@@ -1,5 +1,7 @@
 // Minimal, clean JS: navigation, keyboard, search/filter, zoom toggle
 (() => {
+  const lbYt = document.getElementById('lb-yt');
+
   const gallery = document.getElementById('gallery');
   const search = document.getElementById('search');
   const filter = document.getElementById('filter');
@@ -9,7 +11,6 @@
   const lbImg = document.getElementById('lb-img');
   const lbTitle = document.getElementById('lb-title');
   const lbDesc = document.getElementById('lb-desc');
-  const lbDownload = document.getElementById('lb-download');
   const closeBtn = document.querySelector('.close');
   const prevBtn = document.querySelector('.nav.prev');
   const nextBtn = document.querySelector('.nav.next');
@@ -20,42 +21,57 @@
   function openLB(i){
     const card = cards[i];
     if(!card) return;
+
+    const type = card.dataset.type || 'image';
     const img = card.querySelector('img');
     const full = img.dataset.full || img.src;
-    lbImg.src = full;
-    lbImg.alt = img.alt || '';
-    lbTitle.textContent = card.querySelector('h3').textContent || '';
+
+    lbTitle.textContent = card.querySelector('h3')?.textContent || '';
     lbDesc.textContent = card.dataset.desc || '';
-    lbDownload.href = full;
-    lbDownload.setAttribute('download', full.split('/').pop());
     index = i;
+
+    // Réinitialisation
+    lbImg.style.display = 'none';
+    lbImg.style.transform = 'scale(1)';
+    lbYt.style.display = 'none';
+    lbYt.src = '';
+
+    if (type === 'youtube') {
+      const videoId = full.match(/(?:youtu\.be\/|v=)([a-zA-Z0-9_-]+)/)?.[1];
+      if (videoId) {
+        lbYt.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+        lbYt.style.display = 'block';
+      }
+    } else {
+      lbImg.src = full;
+      lbImg.alt = img.alt || '';
+      lbImg.style.display = 'block';
+    }
+
     lightbox.classList.add('show');
     lightbox.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
-    // preload neighbors
-    preloadImage(cards[(i+1)%cards.length]);
-    preloadImage(cards[(i-1+cards.length)%cards.length]);
-  }
-
-  function preloadImage(card){
-    if(!card) return;
-    const img = card.querySelector('img');
-    const u = img.dataset.full || img.src;
-    const p = new Image(); p.src = u;
   }
 
   function closeLB(){
     lightbox.classList.remove('show');
     lightbox.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
+
     lbImg.src = '';
+    lbImg.style.transform = 'scale(1)';
+
+    // Stop video playback
+    lbYt.src = '';
+    lbYt.style.display = 'none';
+
     index = -1;
   }
 
   function showNext(){ openLB((index+1)%cards.length) }
   function showPrev(){ openLB((index-1+cards.length)%cards.length) }
 
-  // attach click handlers on cards
+  // Attach click handlers on cards
   cards.forEach((c, i) => {
     c.addEventListener('click', () => openLB(i));
     c.addEventListener('keydown', (e) => {
@@ -63,18 +79,22 @@
     });
   });
 
-  // lightbox controls
+  // Lightbox controls
   closeBtn.addEventListener('click', closeLB);
   nextBtn.addEventListener('click', showNext);
   prevBtn.addEventListener('click', showPrev);
 
-  // keyboard
+  // Keyboard controls
   window.addEventListener('keydown', (e) => {
     if(lightbox.classList.contains('show')){
       if(e.key === 'Escape') closeLB();
       if(e.key === 'ArrowRight') showNext();
       if(e.key === 'ArrowLeft') showPrev();
-      if(e.key === '+') lbImg.style.transform = (lbImg.style.transform === 'scale(1.25)') ? 'scale(1)' : 'scale(1.25)';
+      if(e.key === '+') {
+        if(lbImg.style.display === 'block'){
+          lbImg.style.transform = (lbImg.style.transform === 'scale(1.25)') ? 'scale(1)' : 'scale(1.25)';
+        }
+      }
     }
   });
 
@@ -100,7 +120,7 @@
   search.addEventListener('input', applyFilter);
   filter.addEventListener('change', applyFilter);
 
-  // Accessibility: focus trap basic behavior (lightbox)
+  // Accessibility: basic focus trap in lightbox
   document.addEventListener('focus', (e) => {
     if(lightbox.classList.contains('show') && !lightbox.contains(e.target)){
       e.stopPropagation();

@@ -54,29 +54,23 @@ body{
 .controls select{width:180px;flex:0 0 auto;color:var(--muted)}
 
 /* Gallery */
-.gallery{
-  width:100%;
-  max-width:var(--maxw);
-  column-gap:14px;
-  /* masonry-like columns */
-  column-count:3;
-  column-fill:balance;
-  transform:translateZ(0);
+.gallery {
+  display: flex;
+  flex-wrap: wrap;        /* les cartes passent à la ligne */
+  gap: 20px;              /* espace entre les cartes */
+  justify-content: center; /* centre la galerie horizontalement */
 }
 @media (max-width:1000px){ .gallery{column-count:2} }
 @media (max-width:640px){ .gallery{column-count:1} }
 
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:var(--radius);
-  margin:0 0 14px;
-  overflow:hidden;
-  display:inline-block;
-  width:100%;
-  box-shadow: 0 6px 18px rgba(2,6,12,0.6);
-  transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
-  cursor:pointer;
-  border:1px solid rgba(255,255,255,0.03);
+.card {
+  flex: 0 0 250px;        /* largeur fixe des cartes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 8px;
 }
 .card:focus{outline:2px solid rgba(110,231,183,0.12)}
 .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(2,6,12,0.7) }

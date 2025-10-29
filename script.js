@@ -37,7 +37,7 @@
     lbYt.src = '';
 
     if (type === 'youtube') {
-      const videoId = full.match(/(?:youtu\.be\/|v=)([a-zA-Z0-9_-]+)/)?.[1];
+      const videoId = full.match(/(?:youtu\.be\/|v=|shorts\/)([a-zA-Z0-9_-]+)/)?.[1];
       if (videoId) {
         lbYt.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
         lbYt.style.display = 'block';

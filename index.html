@@ -1,27 +1,37 @@
-<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Galerie de microscopie — Mémo</title>
+  <title>L'Infini Petit — Galerie d'Éric Bertrand</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <section class="hero">
+    <h1>Éric Bertrand</h1>
+    <p>
+      Bienvenue dans mon laboratoire visuel. Passionné par l'exploration du monde invisible, 
+      je documente ici mes observations au microscope — de la complexité des micro-organismes 
+      à la beauté géométrique des cristaux.
+    </p>
+  </section>
+
   <header class="topbar">
-    <h1>Microscopie — Galerie</h1>
-    <p class="subtitle">Observations — cliquez pour agrandir • flèches ← → pour naviguer • Échap pour fermer</p>
+    <p class="subtitle" style="text-align: center;">
+      <strong>Galerie de Microscopie</strong> — Cliquez sur une image pour l'agrandir • Flèches ← → pour naviguer
+    </p>
   </header>
 
   <main>
-    <section class="controls">
-      <input id="search" type="search" placeholder="Rechercher par étiquette ou description…" />
+    <section class="controls" style="margin-top: 20px;">
+      <input id="search" type="search" placeholder="Rechercher une observation (ex: nématode, sel...)" />
       <select id="filter">
-        <option value="all">Tout</option>
-        <option value="biologie">Biologie</option>
-        <option value="insecte">Insecte</option>
-        <option value="mineraux">Minéraux</option>
-        <option value="synthetique">Synthétique</option>
-        <option value="photographie">Photographie</option>
+        <option value="all">Toutes les catégories</option>
+        <option value="biologie">🔬 Biologie & Micro-organismes</option>
+        <option value="insecte">🐝 Entomologie</option>
+        <option value="mineraux">💎 Minéraux & Cristaux</option>
+        <option value="synthetique">🧵 Fibres & Synthétique</option>
+        <option value="photographie">📸 Macro-photographie</option>
       </select>
     </section>
 
